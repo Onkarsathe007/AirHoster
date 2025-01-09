@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AirHoster</title>
+</head>
+<body>
+    <h1>Titles </h1>
+    <form action="/listings/new" method="get">
+        <input type="submit" value="create new">
+    </form>
+    <ol>
+    <% for(let list of allListings){ %>
+        <li><a href="/listings/<%=list.id%>"><p><%= list.title%></p></a></li>
+    <% } %>
+    </ol>
+    <!-- <%= allListings %> -->
+
+    <hr>
+</body>
+</html>
