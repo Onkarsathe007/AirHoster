@@ -2,6 +2,7 @@ const express = require("express");
 const app = express();
 const mongoose = require("mongoose");
 const ejs = require("ejs");
+const Listing = require("./models/listing.js"); //accessing the model
 
 let port  = 8080;
 
@@ -11,7 +12,7 @@ app.listen(8080,()=>{
 });
 
 //setting up the database
-let mongoUrl = 'mongodb://127.0.0.1:27017/test';    
+let mongoUrl = 'mongodb://127.0.0.1:27017/wanderlust'; 
 async function main(){
     await mongoose.connect(mongoUrl);
 }
