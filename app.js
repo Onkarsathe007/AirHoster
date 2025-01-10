@@ -3,6 +3,7 @@ const app = express();
 const mongoose = require("mongoose");
 const ejs = require("ejs");
 const Listing = require("./models/listing.js"); //accessing the model
+const ejsMate = require("ejs-mate");
 
 const methodOverride = require('method-override');
 app.use(methodOverride('_method'));
@@ -12,6 +13,9 @@ app.use(express.json());
 
 const path = require("path");
 app.set("view engine","ejs");
+
+//setting an engine for ejs-mate
+app.engine("ejs",ejsMate)
 
 app.set("views",path.join(__dirname,"views"));
 
@@ -122,4 +126,14 @@ app.post("/listings/:id/edit",async (req,res)=>{
         console.log("oop's error occured !");
     })
     res.redirect(`/listings/${id}`)
+});
+
+app.delete("/listings/:id/delete",async (req,res)=>{
+    let id = req.params.id;
+    await Listing.findByIdAndDelete(id).then((res)=>{
+        console.log("Deleted !");
+    }).catch((err)=>{
+        console.log("OOP's error! Unable to delete data...");
+    });
+    res.redirect("/listings/")
 });
