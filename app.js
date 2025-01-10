@@ -4,6 +4,9 @@ const mongoose = require("mongoose");
 const ejs = require("ejs");
 const Listing = require("./models/listing.js"); //accessing the model
 
+const methodOverride = require('method-override');
+app.use(methodOverride('_method'));
+
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
@@ -86,11 +89,37 @@ app.post("/listings/new", (req, res) => {
     res.redirect("/listings")
 });
 
-
 //show route 
 app.get("/listings/:id",async (req,res)=>{
     let {id} = req.params;
     const listData =  await Listing.findById(id);
     console.log(listData);
     res.render("listings/show.ejs",{ listing : listData})
+});
+
+app.get("/listings/:id/edit",async (req,res)=>{
+    let id = req.params.id;
+    let singleData = await Listing.findById(id)
+    console.log(singleData);
+    res.render("./listings/edit.ejs",{singleData});
+});
+
+app.post("/listings/:id/edit",async (req,res)=>{
+    let data = req.body;
+    let id = req.params.id;
+    await Listing.findByIdAndUpdate(
+        id,
+        {
+        title : data.title,
+        description : data.description,
+        imgLink : data.imgLink,
+        price : data.price,
+        location : data.location,
+        country : data.country,
+    }).then((res)=>{
+        console.log("Upadated !")
+    }).catch((err)=>{
+        console.log("oop's error occured !");
+    })
+    res.redirect(`/listings/${id}`)
 });
