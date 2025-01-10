@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h3>Edit Your data</h3>
+    <form method="post" action="/listings/<%= singleData._id %>/edit">
+        <input type="text" name="title" id="title" placeholder="<%=singleData.title%>">
+        <br> 
+        <br>
+        <textarea name="description" id="description" cols="70" placeholder="<%= singleData.description %>"></textarea>
+        <br> 
+        <br>
+        <input type="text" name="imgLink" placeholder="e.g : https://google.com/img/img1.png">
+        <br> 
+        <br>
+        <input  type="number" name="price" id="price" placeholder="<%= singleData.price %>">
+        <br> 
+        <br>
+        <input type="text" name="location" id="location" placeholder="<%=singleData.location%>" >
+        <br>
+        <br>
+        <input type="text" name="country" id="country" placeholder="<%=singleData.country%>" >
+        <input type="submit" value="submit">
+    </form>
+</body>
+</html>

@@ -12,6 +12,12 @@
         <li>&#8377;<%= listing.price.toLocaleString("en-IN") %> </li> 
         <!-- toLocaleString() function add the commas to the number by the country standards -->
         <li>    <%= listing.location %> </li>
+        <br>
+        <a href="/listings/<%=listing._id%>/edit"><button>edit</button></a>
+        <br><br>
+        <form action="/listings/<%=listing.id%>/delete?_method=DELETE" method="POST">
+            <input type="submit" value="delete">
+        </form>
     </ul>
 </body>
 </html>
