@@ -1,14 +1,31 @@
 <% layout('./layouts/boilerplate') %>
 <body>
-    <form action="/listings/new" method="get">
+    <!-- <form action="/listings/new" method="get">
         <input type="submit" value="create new">
-    </form>
-    <ol>
-    <% for(let list of allListings){ %>
-        <li><a href="/listings/<%=list.id%>"><p><%= list.title%></p></a></li>
-    <% } %>
-    </ol>
-    <!-- <%= allListings %> -->
+    </form> -->
+    <div class="main">
+            <% for(let list of allListings){ %>
+            <div class="card" style="width: 18rem;">
+              <a href="/listings/<%=list.id%>">
+                <img src="<%=list.image.url %>" class="card-img-top" alt="...">
+                <div class="card-img-overlay">
 
+                  <i class="fa-solid fa-angles-right" style="margin-top: 30%; transform: translateY(-50%); float: right;font-size :1.5rem;color:wheat"></i>
+                  <!-- <i class="fa-solid fa-angles-right"></i> -->
+                </div>
+                
+                <div class="card-body">
+                  <div class="top-card-heading">
+                    <h5><%= list.location%></h5>
+                    <!-- rating here -->
+                  </div>
+                  <b> <a id="card-title" href="/listings/<%=list.id%>"><p><%= list.title %></p></a></b>
+                </a>
+                  <b><p class="card-text" id="bold-prize">&#x20B9;<%=list.price%> (<s><%=list.price%>)</s></p></b>
+                  <p class="card-text"><%= list.description%></p>
+                </div>
+              </div>
+              <% } %>
+    </div>
     <hr>
 </body>

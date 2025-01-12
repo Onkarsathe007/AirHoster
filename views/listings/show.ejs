@@ -1,16 +1,45 @@
 <% layout('./layouts/boilerplate') %>
 <body>
-    <ul>
-        <li>    <%= listing.title %> </li>
-        <li>    <%= listing.description %> </li>
-        <li>&#8377;<%= listing.price.toLocaleString("en-IN") %> </li> 
+    <div class="card">
+        <div class="title-show">
+            <h3> <b><%= listing.title %> </b> </h3>
+        </div>
+        <div class="photo-album">
+            <img src="<%= listing.image.url %>" alt="" srcset="" class="card-img">
+            <img src="<%= listing.image.url %>" alt="" srcset="">
+            <!-- <img src="https://images.pexels.com/photos/462331/pexels-photo-462331.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" alt="Photo 1"> -->
+            <!-- <img src="https://images.pexels.com/photos/534219/pexels-photo-534219.jpeg?auto=compress&cs=tinysrgb&w=400">
+            <img src="https://images.pexels.com/photos/534219/pexels-photo-534219.jpeg?auto=compress&cs=tinysrgb&w=400" alt="Photo 4">
+            <img src="https://images.pexels.com/photos/534219/pexels-photo-534219.jpeg?auto=compress&cs=tinysrgb&w=400" alt="Photo 5">
+            <img src="https://images.pexels.com/photos/534219/pexels-photo-534219.jpeg?auto=compress&cs=tinysrgb&w=400" alt="Photo 6">-->
+        </div>
+        <div class="location-show">
+            <h4><i class="fa-solid fa-location-dot"></i>   <%=listing.location%>,<%=listing.country%></h4>
+        </div>
+        <div class="div-price" style="margin-left: 0.6rem;">
+            <h4>&#8377;<%= listing.price.toLocaleString("en-IN") %> </h4> 
+        </div>
+        <!-- Note : add the hostel details like No of rooms and etc. -->
+        <div class="rating">
+            <!--Note: rating fetch from the database -->
+            <i class="fa-solid fa-star"></i> <span>1 review</span>
+        </div>
+        <!-- Note : add admin(hostel owner ) -->
+        <hr>
+        <div class="div-decription">
+            <p><%=listing.description%></p>
+        </div>
+
+    </div>
         <!-- toLocaleString() function add the commas to the number by the country standards -->
-        <li>    <%= listing.location %> </li>
-        <br>
-        <a href="/listings/<%=listing._id%>/edit"><button>edit</button></a>
-        <br><br>
-        <form action="/listings/<%=listing.id%>/delete?_method=DELETE" method="POST">
-            <input type="submit" value="delete">
-        </form>
-    </ul>
+        <div class="show-btns">
+            <a href="/listings/<%=listing._id%>/edit">
+                <button class="btn btn-dark col-2" id="add-btn">Edit</button>
+            </a>
+            <form action="/listings/<%=listing._id%>/delete?_method=DELETE" method="POST">
+                <input type="submit" value="Delete" class="btn btn-dark col-2"  >
+            </form>
+        </div>
+        
+    <br><br><br><br>
 </body>
