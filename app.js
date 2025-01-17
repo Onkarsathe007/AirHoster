@@ -1,3 +1,4 @@
+require('dotenv').config();
 const express = require("express");
 const app = express();
 const mongoose = require("mongoose");
@@ -20,15 +21,15 @@ app.engine("ejs",ejsMate)
 app.set("views",path.join(__dirname,"views"));
 
 app.use(express.static(path.join(__dirname,"public")));
-let port  = 8080;
+const port = process.env.PORT || 8080;
+const mongoUrl = process.env.MONGODB_URL || 'mongodb://127.0.0.1:27017/wanderlust';
 
 //setting up the server
-app.listen(8080,()=>{
+app.listen(port,()=>{
     console.log("Server is listening ",port);
 });
 
 //setting up the database
-let mongoUrl = 'mongodb://127.0.0.1:27017/wanderlust'; 
 async function main(){
     await mongoose.connect(mongoUrl);
 }
