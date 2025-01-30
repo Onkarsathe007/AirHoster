@@ -1,40 +1,47 @@
 <% layout('./layouts/boilerplate') %>
-<body>
-<div class="col-9">
-    <h3>Edit Your data</h3>
-    <form method="post" action="/listings/<%= singleData._id %>/edit">
-        <div class="mb-3">
-            <label for="title" class="form-label">Title</label>
-            <input type="text" name="title" id="title" placeholder="Enter Title" value="<%=singleData.title%>" class="form-control">
+
+    <body>
+        <div class="col-9">
+            <h3>Edit Your data</h3>
+            <form method="post" action="/listings/<%= singleData._id %>/edit">
+                <div class="mb-3">
+                    <label for="title" class="form-label">Title</label>
+                    <input type="text" name="title" id="title" placeholder="Enter Title" value="<%=singleData.title%>"
+                        class="form-control">
+                </div>
+                <div class="mb-3">
+                    <label for="description" class="form-label">Description</label>
+                    <textarea name="description" id="description"
+                        class="form-control"><%=singleData.description%></textarea>
+                </div>
+                <div class="mb-3">
+                    <label for="imgLink" class="form-label">Enter Image link</label>
+                    <input type="text" name="imgLink" class="form-control" id="imgLink"
+                        placeholder="https://www.example.com/path/to/your-image.jpg" value="<%=singleData.image.url%>">
+                </div>
+                <div class="mb-3">
+                    <label for="location" class="form-label">Location</label>
+                    <input type="text" name="location" id="location" class="form-control" placeholder="Pune, India"
+                        value="<%=singleData.location%>">
+                </div>
+                <div class="row">
+                    <!-- Note(col-4) : It will take four coulmns -->
+                    <div class="mb-3 col-md-4">
+                        <!-- col-md-4 : If the screen size is medium or larger, the element will take up 4 columns. -->
+                        <label for="price" class="form-label">Price</label>
+                        <input type="number" name="price" class="form-control" id="price" placeholder="12000"
+                            value="<%=singleData.price%>">
+                    </div>
+
+                    <div class="mb-3 col-md-8">
+                        <!-- col-md-8 : If the screen size is medium or larger, the element will take up 8 columns. -->
+                        <label for="country" class="form-label">Country</label>
+                        <input type="text" name="country" class="form-control" id="country"
+                            value="<%=singleData.country%>">
+                    </div>
+                </div>
+                <input type="submit" value="submit" class="btn btn-dark col-2" id="add-btn">
+                <br><br>
+            </form>
         </div>
-        <div class="mb-3">
-            <label for="description"class="form-label">Description</label>
-            <textarea name="description" id="description" class="form-control"><%=singleData.description%></textarea>
-        </div>
-        <div class="mb-3">
-            <label for="imgLink" class="form-label">Enter Image link</label>
-            <input type="text" name="imgLink"  class="form-control" id="imgLink" placeholder="https://www.example.com/path/to/your-image.jpg" value="<%=singleData.image.url%>">
-        </div>
-        <div class="mb-3">
-            <label for="location" class="form-label">Location</label>
-            <input type="text" name="location" id="location" class="form-control" placeholder="Pune, India" value="<%=singleData.location%>">
-        </div>
-        <div class="row">
-            <!-- Note(col-4) : It will take four coulmns -->
-            <div class="mb-3 col-md-4">
-                  <!-- col-md-4 : If the screen size is medium or larger, the element will take up 4 columns. -->
-                <label for="price" class="form-label">Price</label>
-                <input type="number" name="price"  class="form-control" id="price" placeholder="12000" value="<%=singleData.price%>">
-            </div>
-            
-            <div class="mb-3 col-md-8">
-                <!-- col-md-8 : If the screen size is medium or larger, the element will take up 8 columns. -->
-                <label for="country" class="form-label">Country</label>
-                <input type="text" name="country"  class="form-control" id="country" value="<%=singleData.country%>">
-            </div>
-        </div>
-        <input type="submit" value="submit" class="btn btn-dark col-2" id="add-btn">
-        <br><br>
-    </form>
-</div>
-</body>
+    </body>

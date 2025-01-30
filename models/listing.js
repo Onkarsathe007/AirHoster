@@ -3,11 +3,11 @@ const Schema = mongoose.Schema;
 
 //Definig an schema 
 const listingSchema = new Schema({
-    title : {
-        type : String,
-        required : true,
+    title: {
+        type: String,
+        required: true,
     },
-    description : String,
+    description: String,
     image: {
         type: Object,  // Change from String to Object
         default: {
@@ -19,12 +19,12 @@ const listingSchema = new Schema({
             return typeof v === 'string' ? { url: v } : v;
         }
     },
-    price : Number,
-    location : String,
-    country : String,
+    price: Number,
+    location: String,
+    country: String,
 });
 
-const Listing = mongoose.model("Listing",listingSchema);
+const Listing = mongoose.model("Listing", listingSchema);
 
 // exporting the module 
 module.exports = Listing;

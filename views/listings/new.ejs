@@ -1,44 +1,71 @@
 <% layout('./layouts/boilerplate') %>
-<body>
-    <div class="row">
-        <div class="col-8 offset-2">
-    <h3>Create new Listing</h3>
-    <form action="/listings/new" method="post">
-        <div class="mb-3">
-            <label for="title" class="form-label">Title</label>
-            <input type="text" name="title" id="title" placeholder="Enter Title" class="form-control">
-        </div>
-        <div class="mb-3">
-            <label for="description"class="form-label">Description</label>
-            <textarea name="description" id="description" class="form-control" placeholder=""></textarea>
-        </div>
-        <div class="mb-3">
-            <label for="imgLink" class="form-label">Enter Image link</label>
-            <input type="text" name="imgLink"  class="form-control" id="imgLink" placeholder="https://www.example.com/path/to/your-image.jpg">
-        </div>
-        <div class="mb-3">
-            <label for="location" class="form-label">Location</label>
-            <input type="text" name="location" id="location" class="form-control" placeholder="Pune, India">
-        </div>
+
+    <body>
         <div class="row">
-            <!-- Note(col-4) : It will take four coulmns -->
-            <div class="mb-3 col-md-4">
-                  <!-- col-md-4 : If the screen size is medium or larger, the element will take up 4 columns. -->
-                <label for="price" class="form-label">Price</label>
-                <input type="number" name="price"  class="form-control" id="price" placeholder="12000">
-            </div>
-            
-            <div class="mb-3 col-md-8">
-                <!-- col-md-8 : If the screen size is medium or larger, the element will take up 8 columns. -->
-                <label for="country" class="form-label">Country</label>
-                <input type="text" name="country"  class="form-control" id="country" placeholder="India">
+            <div class="col-8 offset-2">
+                <h3>Create new Listing</h3>
+                <form action="/listings/new" method="post" class="needs-validation">
+                    <div class="mb-3">
+                        <label for="title" class="form-label">Title</label>
+                        <input type="text" name="title" id="title" placeholder="Enter Title" class="form-control"
+                            required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="description" class="form-label">Description</label>
+                        <textarea name="description" id="description" class="form-control" placeholder=""
+                            required></textarea>
+                    </div>
+                    <div class="mb-3">
+                        <label for="imgLink" class="form-label">Enter Image link</label>
+                        <input type="text" name="imgLink" class="form-control" id="imgLink"
+                            placeholder="https://www.example.com/path/to/your-image.jpg" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="location" class="form-label">Location</label>
+                        <input type="text" name="location" id="location" class="form-control" placeholder="Pune, India"
+                            required>
+                    </div>
+                    <div class="row">
+                        <!-- Note(col-4) : It will take four coulmns -->
+                        <div class="mb-3 col-md-4">
+                            <!-- col-md-4 : If the screen size is medium or larger, the element will take up 4 columns. -->
+                            <label for="price" class="form-label">Price</label>
+                            <input type="number" name="price" class="form-control" id="price" placeholder="12000"
+                                required>
+                        </div>
+
+                        <div class="mb-3 col-md-8">
+                            <!-- col-md-8 : If the screen size is medium or larger, the element will take up 8 columns. -->
+                            <label for="country" class="form-label">Country</label>
+                            <input type="text" name="country" class="form-control" id="country" placeholder="India"
+                                required>
+                        </div>
+                    </div>
+                    <br>
+                    <input class="btn btn-dark col-2" id="add-btn" type="submit" value="Add">
+                    <br><br> <br> <br>
+                </form>
             </div>
         </div>
-        <br>
-        <input class="btn btn-dark col-2" id="add-btn" type="submit" value="Add">
-        <br><br> <br> <br>
-    </form>
-    </div>
-</div>
-    
-</body>
+        <script>
+            // Example starter JavaScript for disabling form submissions if there are invalid fields
+            (() => {
+                'use strict'
+
+                // Fetch all the forms we want to apply custom Bootstrap validation styles to
+                const forms = document.querySelectorAll('.needs-validation')
+
+                // Loop over them and prevent submission
+                Array.from(forms).forEach(form => {
+                    form.addEventListener('submit', event => {
+                        if (!form.checkValidity()) {
+                            event.preventDefault()
+                            event.stopPropagation()
+                        }
+
+                        form.classList.add('was-validated')
+                    }, false)
+                })
+            })()
+        </script>
+    </body>
