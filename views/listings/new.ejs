@@ -4,26 +4,42 @@
         <div class="row">
             <div class="col-8 offset-2">
                 <h3>Create new Listing</h3>
-                <form action="/listings/new" method="post" class="needs-validation">
+                <form action="/listings/new" method="post" novalidate class="needs-validation">
                     <div class="mb-3">
                         <label for="title" class="form-label">Title</label>
                         <input type="text" name="title" id="title" placeholder="Enter Title" class="form-control"
                             required>
+                        <!-- <div class="valid-feedback">  for the valid feedback
+
+                        </div> -->
+                        <div class="invalid-feedback">
+                            Please enter valid title
+                        </div>
                     </div>
                     <div class="mb-3">
                         <label for="description" class="form-label">Description</label>
                         <textarea name="description" id="description" class="form-control" placeholder=""
                             required></textarea>
+                        <div class="valid-feedback">Good valid-feedback</div>
+                        <div class="invalid-feedback">
+                            Please enter valid feedback
+                        </div>
                     </div>
                     <div class="mb-3">
                         <label for="imgLink" class="form-label">Enter Image link</label>
                         <input type="text" name="imgLink" class="form-control" id="imgLink"
                             placeholder="https://www.example.com/path/to/your-image.jpg" required>
+                        <div class="invalid-feedback">
+                            Please enter valid image link
+                        </div>
                     </div>
                     <div class="mb-3">
                         <label for="location" class="form-label">Location</label>
                         <input type="text" name="location" id="location" class="form-control" placeholder="Pune, India"
                             required>
+                        <div class="invalid-feedback">
+                            Please enter valid image location
+                        </div>
                     </div>
                     <div class="row">
                         <!-- Note(col-4) : It will take four coulmns -->
@@ -45,27 +61,7 @@
                     <input class="btn btn-dark col-2" id="add-btn" type="submit" value="Add">
                     <br><br> <br> <br>
                 </form>
+                <script src="/js/script.js"></script>
             </div>
         </div>
-        <script>
-            // Example starter JavaScript for disabling form submissions if there are invalid fields
-            (() => {
-                'use strict'
-
-                // Fetch all the forms we want to apply custom Bootstrap validation styles to
-                const forms = document.querySelectorAll('.needs-validation')
-
-                // Loop over them and prevent submission
-                Array.from(forms).forEach(form => {
-                    form.addEventListener('submit', event => {
-                        if (!form.checkValidity()) {
-                            event.preventDefault()
-                            event.stopPropagation()
-                        }
-
-                        form.classList.add('was-validated')
-                    }, false)
-                })
-            })()
-        </script>
     </body>
