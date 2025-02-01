@@ -7,6 +7,7 @@ const Listing = require("./models/listing.js"); //accessing the model
 const ejsMate = require("ejs-mate");
 const wrapAssync = require("./utils/wrapAssync.js")
 const methodOverride = require('method-override');
+const expressError = require("./utils/ExpressError.js");
 app.use(methodOverride('_method'));
 
 app.use(express.urlencoded({ extended: true }));
@@ -23,11 +24,6 @@ app.set("views", path.join(__dirname, "views"));
 app.use(express.static(path.join(__dirname, "public")));
 const port = process.env.PORT || 8080;
 const mongoUrl = process.env.MONGODB_URL || 'mongodb://127.0.0.1:27017/wanderlust';
-
-//setting up the server
-app.listen(port, () => {
-    console.log("Server is listening ", port);
-});
 
 //setting up the database
 async function main() {
@@ -110,7 +106,7 @@ app.get("/listings/:id/edit", async (req, res) => {
     res.render("./listings/edit.ejs", { singleData });
 });
 
-app.post("/listings/:id/edit",wrapAssync(async (req, res) => {
+app.post("/listings/:id/edit", wrapAssync(async (req, res) => {
     let data = req.body;
     let id = req.params.id;
     await Listing.findByIdAndUpdate(
@@ -138,4 +134,16 @@ app.delete("/listings/:id/delete", async (req, res) => {
         console.log("OOP's error! Unable to delete data...");
     });
     res.redirect("/listings/")
+});
+app.all("*", (req, res, next) => {
+    next(new expressError(404,"Page Not Found!"))
+});
+app.use((err, req, res, next) => {
+    let { statusCode, message } = err;
+    res.render("./listings/error.ejs",{statusCode : statusCode, message : message});
+
+});
+//setting up the server
+app.listen(port, () => {
+    console.log("Server is listening ", port);
 });
