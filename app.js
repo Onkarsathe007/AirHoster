@@ -5,7 +5,7 @@ const mongoose = require("mongoose");
 const ejs = require("ejs");
 const Listing = require("./models/listing.js"); //accessing the model
 const ejsMate = require("ejs-mate");
-
+const wrapAssync = require("./utils/wrapAssync.js")
 const methodOverride = require('method-override');
 app.use(methodOverride('_method'));
 
@@ -73,7 +73,7 @@ app.get("/listings/new", (req, res) => {
 });
 
 //new route | Post request to add the data |
-app.post("/listings/new", (req, res) => {
+app.post("/listings/new", wrapAssync((req, res) => {
     const { title, description, imgLink, price, location, country } = req.body;
     console.log(req.body.listing); // Logs the entire listing object
     // console.log(title, description, imgLink, price, country); // Logs individual properties
@@ -93,7 +93,7 @@ app.post("/listings/new", (req, res) => {
         console.log("Error Occured ");
     })
     res.redirect("/listings")
-});
+}));
 
 //show route 
 app.get("/listings/:id", async (req, res) => {
@@ -110,7 +110,7 @@ app.get("/listings/:id/edit", async (req, res) => {
     res.render("./listings/edit.ejs", { singleData });
 });
 
-app.post("/listings/:id/edit", async (req, res) => {
+app.post("/listings/:id/edit",wrapAssync(async (req, res) => {
     let data = req.body;
     let id = req.params.id;
     await Listing.findByIdAndUpdate(
@@ -128,7 +128,7 @@ app.post("/listings/:id/edit", async (req, res) => {
             console.log("oop's error occured !");
         })
     res.redirect(`/listings/${id}`)
-});
+}));
 
 app.delete("/listings/:id/delete", async (req, res) => {
     let id = req.params.id;
